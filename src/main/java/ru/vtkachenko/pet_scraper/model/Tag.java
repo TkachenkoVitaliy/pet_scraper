@@ -18,8 +18,7 @@ public class Tag {
     public Tag() {
     }
 
-    public Tag(Long id, String name, String tagHTML) {
-        this.id = id;
+    public Tag(String name, String tagHTML) {
         this.name = name;
         this.tagHTML = tagHTML;
     }

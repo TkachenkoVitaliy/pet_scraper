@@ -1,34 +1,18 @@
-package ru.vtkachenko.pet_scraper.model;
+package ru.vtkachenko.pet_scraper.contoller.request;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "cities")
-public class City {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class CityRequest {
     private String name;
 
-    @Column(name = "short_name")
     private String shortName;
 
-    public City() {
-    }
-
-    public City(String name, String shortName) {
+    public CityRequest(String name, String shortName) {
         this.name = name;
         this.shortName = shortName;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public CityRequest(String name) {
+        this.name = name;
+        this.shortName = name;
     }
 
     public String getName() {

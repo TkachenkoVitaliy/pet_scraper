@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "contractors")
-public class Contactor {
+public class Contractor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,11 +18,10 @@ public class Contactor {
     @Column(name = "is_active")
     private boolean isActive;
 
-    public Contactor() {
+    public Contractor() {
     }
 
-    public Contactor(Long id, String name, String inn, boolean isActive) {
-        this.id = id;
+    public Contractor(String name, String inn, boolean isActive) {
         this.name = name;
         this.inn = inn;
         this.isActive = isActive;

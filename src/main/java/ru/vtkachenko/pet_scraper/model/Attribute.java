@@ -15,8 +15,7 @@ public class Attribute {
     public Attribute() {
     }
 
-    public Attribute(Long id, String name) {
-        this.id = id;
+    public Attribute(String name) {
         this.name = name;
     }
 

@@ -7,6 +7,6 @@ import ru.vtkachenko.pet_scraper.model.ScrapTask;
 public class ScrapTasksService {
 
     public int runTask(ScrapTask task) {
-
+        return 0;
     }
 }
