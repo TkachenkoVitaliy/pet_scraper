@@ -24,6 +24,8 @@ public class ScrapTask {
 
     private String competitor;
 
+    private String url;
+
     //TODO придумать как это нормально реализовать
     @Type(type = "string-array")
     @Column(
@@ -35,9 +37,10 @@ public class ScrapTask {
     public ScrapTask() {
     }
 
-    public ScrapTask(String title, String competitor, String[] selectors) {
+    public ScrapTask(String title, String competitor, String url, String[] selectors) {
         this.title = title;
         this.competitor = competitor;
+        this.url = url;
         this.selectors = selectors;
     }
 
@@ -71,5 +74,13 @@ public class ScrapTask {
 
     public void setSelectors(String[] selectors) {
         this.selectors = selectors;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

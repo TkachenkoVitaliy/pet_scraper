@@ -17,7 +17,7 @@ public class CityController {
         this.service = service;
     }
 
-    @PostMapping("/test")
+    @PostMapping("/cities")
     public String createCity(@RequestBody CityRequest cityRequest){
         service.saveCity(cityRequest);
 
