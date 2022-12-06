@@ -12,12 +12,17 @@ import java.util.Arrays;
 @Service
 public class ScrapTasksService {
 
-    public int runTask(ScrapTask task) throws IOException {
+    public String runTask(ScrapTask task) throws IOException {
         Document doc = Jsoup.connect(task.getUrl()).get();
         Elements elements = doc.select("body");
 
-        Arrays.stream(task.getSelectors())
-                });
-        return 0;
+        Elements finalElements = Arrays.stream(task.getSelectors())
+                .reduce(elements, (partialElements, item) -> partialElements.select(item), (first, second) -> second);
+
+        if (finalElements.size() == 1) {
+            return finalElements.first().toString();
+        }
+
+        return "fail";
     }
 }
