@@ -1,6 +1,8 @@
 package ru.vtkachenko.pet_scraper.contoller;
 
 import org.springframework.web.bind.annotation.*;
+import ru.vtkachenko.pet_scraper.exception.NaNException;
+import ru.vtkachenko.pet_scraper.model.PreliminaryTask;
 import ru.vtkachenko.pet_scraper.model.ScrapTask;
 import ru.vtkachenko.pet_scraper.service.ScrapTasksService;
 
@@ -21,8 +23,13 @@ public class ScrapTasksController {
     }
 
     @PostMapping("/test")
-    public String runScrapTask (@RequestBody ScrapTask scrapTask) throws IOException {
-        return scrapTasksService.runTask(scrapTask);
+    public String runScrapTask (@RequestBody PreliminaryTask preliminaryTask) throws IOException {
+        return scrapTasksService.runPreliminaryTask(preliminaryTask);
+    }
+
+    @PostMapping("/test2")
+    public int runScrapTask (@RequestBody ScrapTask scrapTask) throws IOException, NaNException {
+        return scrapTasksService.runScrapTask(scrapTask);
     }
 
 
