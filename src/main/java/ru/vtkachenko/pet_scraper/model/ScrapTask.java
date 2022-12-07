@@ -15,7 +15,7 @@ import javax.persistence.*;
 })
 @Entity
 @Table(name = "tasks")
-public class ScrapTask {
+public class ScrapTask extends PreliminaryTask {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
