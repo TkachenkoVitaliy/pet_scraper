@@ -1,5 +1,6 @@
 package ru.vtkachenko.pet_scraper.contractor.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.vtkachenko.pet_scraper.contractor.controller.request.ContractorRequest;
 import ru.vtkachenko.pet_scraper.exception.NotFoundObjectException;
@@ -13,7 +14,7 @@ public class ContractorService {
 
     private final ContractorRepository contractorRepository;
 
-
+    @Autowired
     public ContractorService(ContractorRepository contractorRepository) {
         this.contractorRepository = contractorRepository;
     }

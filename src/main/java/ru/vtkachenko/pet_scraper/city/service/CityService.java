@@ -1,5 +1,6 @@
 package ru.vtkachenko.pet_scraper.city.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.vtkachenko.pet_scraper.city.controller.request.CityRequest;
 import ru.vtkachenko.pet_scraper.exception.NotFoundObjectException;
@@ -10,10 +11,11 @@ import java.util.List;
 
 @Service
 public class CityService {
-    private final CityRepository repository;
+    private final CityRepository cityRepository;
 
-    public CityService(CityRepository repository) {
-        this.repository = repository;
+    @Autowired
+    public CityService(CityRepository cityRepository) {
+        this.cityRepository = cityRepository;
     }
 
     public void saveCity(CityRequest cityRequest) {
@@ -22,11 +24,11 @@ public class CityService {
         city.setName(cityRequest.getName() != null ? cityRequest.getName() : null);
         city.setShortName(cityRequest.getShortName() != null ? cityRequest.getShortName() : city.getName());
 
-        repository.save(city);
+        cityRepository.save(city);
     }
 
     public List<City> getAllCities() {
-        return repository.findAll();
+        return cityRepository.findAll();
     }
 
     public void updateCity(CityRequest cityRequest) throws NotFoundObjectException {
@@ -34,6 +36,6 @@ public class CityService {
         saveCity(cityRequest);
     }
     public City findById(Long id) throws NotFoundObjectException {
-        return repository.findById(id).orElseThrow(() -> new NotFoundObjectException("Не удалось найти город"));
+        return cityRepository.findById(id).orElseThrow(() -> new NotFoundObjectException("Не удалось найти город"));
     }
 }

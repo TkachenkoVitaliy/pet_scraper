@@ -1,5 +1,6 @@
 package ru.vtkachenko.pet_scraper.scrap_task.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.vtkachenko.pet_scraper.exception.NaNException;
 import ru.vtkachenko.pet_scraper.scrap_task.model.PreliminaryTask;
@@ -13,6 +14,7 @@ import java.io.IOException;
 public class ScrapTaskController {
     private final ScrapTaskService scrapTasksService;
 
+    @Autowired
     public ScrapTaskController(ScrapTaskService scrapTasksService) {
         this.scrapTasksService = scrapTasksService;
     }
