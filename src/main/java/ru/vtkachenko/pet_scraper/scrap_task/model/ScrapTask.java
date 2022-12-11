@@ -5,6 +5,9 @@ import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
 import ru.vtkachenko.pet_scraper.city.model.City;
+import ru.vtkachenko.pet_scraper.contractor.model.Contractor;
+import ru.vtkachenko.pet_scraper.nomenclature.model.Nomenclature;
+
 import javax.persistence.*;
 
 @TypeDefs({
@@ -20,9 +23,13 @@ public class ScrapTask extends PreliminaryTask {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String title;
+    @ManyToOne
+    @JoinColumn(name = "nomenclature_id")
+    private Nomenclature nomenclature;
 
-    private String competitor;
+    @ManyToOne
+    @JoinColumn(name = "contractor_id")
+    private Contractor contractor;
 
     @ManyToOne
     @JoinColumn(name = "city_id")
@@ -38,15 +45,19 @@ public class ScrapTask extends PreliminaryTask {
     )
     private String[] selectors;
 
+    private Boolean active;
+
     public ScrapTask() {
     }
 
-    public ScrapTask(String title, String competitor, City city, String url, String[] selectors) {
-        this.title = title;
-        this.competitor = competitor;
+    public ScrapTask(Nomenclature nomenclature, Contractor contractor, City city, String url, String[] selectors,
+                     Boolean active) {
+        this.nomenclature = nomenclature;
+        this.contractor = contractor;
         this.city = city;
         this.url = url;
         this.selectors = selectors;
+        this.active = active;
     }
 
     public Long getId() {
@@ -57,28 +68,20 @@ public class ScrapTask extends PreliminaryTask {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public Nomenclature getNomenclature() {
+        return nomenclature;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setNomenclature(Nomenclature nomenclature) {
+        this.nomenclature = nomenclature;
     }
 
-    public String getCompetitor() {
-        return competitor;
+    public Contractor getContractor() {
+        return contractor;
     }
 
-    public void setCompetitor(String competitor) {
-        this.competitor = competitor;
-    }
-
-    public String[] getSelectors() {
-        return selectors;
-    }
-
-    public void setSelectors(String[] selectors) {
-        this.selectors = selectors;
+    public void setContractor(Contractor contractor) {
+        this.contractor = contractor;
     }
 
     public City getCity() {
@@ -89,11 +92,31 @@ public class ScrapTask extends PreliminaryTask {
         this.city = city;
     }
 
+    @Override
     public String getUrl() {
         return url;
     }
 
+    @Override
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    @Override
+    public String[] getSelectors() {
+        return selectors;
+    }
+
+    @Override
+    public void setSelectors(String[] selectors) {
+        this.selectors = selectors;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 }
