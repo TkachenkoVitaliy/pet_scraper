@@ -45,12 +45,19 @@ public class CityController {
     }
 
     @GetMapping("/cities/{id}")
-    public ResponseEntity<CityResponse> getCityById(@PathVariable Long id) throws NotFoundObjectException {
+    public ResponseEntity<CityResponse> getCity(@PathVariable Long id) throws NotFoundObjectException {
         // TODO придумать как отдавать на клиента обработанные ошибки
         City city = cityService.getCityById(id);
         CityResponse cityResponse = cityMapper.mapFromEntity(city);
 
         return ResponseEntity.status(HttpStatus.OK).body(cityResponse);
+    }
+
+    @DeleteMapping("/cities/{id}")
+    public ResponseEntity deleteCity(@PathVariable Long id) throws NotFoundObjectException {
+        cityService.deleteCity(id);
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
 }

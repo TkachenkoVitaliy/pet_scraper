@@ -38,11 +38,9 @@ public class CityService {
         return saveCity(city);
     }
 
-    public void deleteCity(City city) {
-        cityRepository.delete(city);
-    }
-
-    public void deleteCity(Long id) {
+    public void deleteCity(Long id) throws NotFoundObjectException {
+        //TODO подумать как правильно поступать в таком случае, явно напарываться на ошибку или нет
+        City city = getCityById(id);
         cityRepository.deleteById(id);
     }
 
