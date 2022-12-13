@@ -10,9 +10,11 @@ import ru.vtkachenko.pet_scraper.contractor.service.ContractorService;
 public class ContractorController {
 
     private final ContractorService contractorService;
+    private final ContractorMapper contractorMapper;
 
     @Autowired
-    public ContractorController(ContractorService contractorService) {
+    public ContractorController(ContractorService contractorService, ContractorMapper contractorMapper) {
         this.contractorService = contractorService;
+        this.contractorMapper = contractorMapper;
     }
 }
