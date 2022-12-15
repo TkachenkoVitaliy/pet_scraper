@@ -22,11 +22,13 @@ public class CityService {
     }
 
     public City getCityById(Long id) throws NotFoundObjectException {
-        return cityRepository.findById(id).orElseThrow(() -> new NotFoundObjectException("город", id.toString()));
+        return cityRepository.findById(id).orElseThrow(() -> new NotFoundObjectException("город", id));
     }
 
-    public City getCityByName(String name) {
-        return cityRepository.findCityByName(name);
+    public City getCityByName(String name) throws NotFoundObjectException {
+        City city = cityRepository.findCityByName(name);
+        if (city == null) throw new NotFoundObjectException("город", "названием", name);
+        return city;
     }
 
     public City saveCity(City city) {
