@@ -19,6 +19,7 @@ public class ScrapTaskController {
         this.scrapTasksService = scrapTasksService;
     }
 
+    //TODO refactor all
     @GetMapping("/test")
     public String testMapping() {
         return "TEST COMPLETED";
