@@ -1,9 +1,11 @@
 package ru.vtkachenko.pet_scraper.nomenclature.controller;
 
+import org.springframework.stereotype.Component;
 import ru.vtkachenko.pet_scraper.nomenclature.controller.dto.NomenclatureRequest;
 import ru.vtkachenko.pet_scraper.nomenclature.controller.dto.NomenclatureResponse;
 import ru.vtkachenko.pet_scraper.nomenclature.model.Nomenclature;
 
+@Component
 public class NomenclatureMapper {
 
     public Nomenclature mapToEntity(NomenclatureRequest nomenclatureRequest) {

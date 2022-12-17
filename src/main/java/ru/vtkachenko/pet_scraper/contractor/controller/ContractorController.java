@@ -3,14 +3,12 @@ package ru.vtkachenko.pet_scraper.contractor.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.vtkachenko.pet_scraper.contractor.controller.dto.ContractorRequest;
 import ru.vtkachenko.pet_scraper.contractor.controller.dto.ContractorResponse;
 import ru.vtkachenko.pet_scraper.contractor.model.Contractor;
 import ru.vtkachenko.pet_scraper.contractor.service.ContractorService;
+import ru.vtkachenko.pet_scraper.exception.NotFoundObjectException;
 
 import java.util.List;
 
@@ -27,11 +25,44 @@ public class ContractorController {
         this.contractorMapper = contractorMapper;
     }
 
-    @PostMapping
+    @PostMapping("/contractors")
     public ResponseEntity<ContractorResponse> createContractor(@RequestBody ContractorRequest contractorRequest) {
         Contractor contractor = contractorMapper.mapToEntity(contractorRequest);
         ContractorResponse contractorResponse = contractorMapper.mapFromEntity(contractorService.saveContractor(contractor));
 
         return ResponseEntity.status(HttpStatus.CREATED).body(contractorResponse);
+    }
+
+    @PutMapping("/contractors")
+    public ResponseEntity<ContractorResponse> updateContractor(@RequestBody ContractorRequest contractorRequest) throws NotFoundObjectException {
+        Contractor contractor = contractorMapper.mapToEntity(contractorRequest);
+        ContractorResponse contractorResponse = contractorMapper.mapFromEntity(contractorService.updateContractor(contractor));
+
+        return ResponseEntity.status(HttpStatus.OK).body(contractorResponse);
+    }
+
+    @GetMapping("/contractors")
+    public ResponseEntity<List<ContractorResponse>> getAllContractors() {
+        List<Contractor> contractors = contractorService.getAllContractors();
+        List<ContractorResponse> contractorsResponse = contractors.stream().
+                map(contractorMapper::mapFromEntity)
+                .toList();
+
+        return ResponseEntity.status(HttpStatus.OK).body(contractorsResponse);
+    }
+
+    @GetMapping("/contractors/{id}")
+    public ResponseEntity<ContractorResponse> getContractor(@PathVariable Long id) throws NotFoundObjectException {
+        Contractor contractor = contractorService.getContractorById(id);
+        ContractorResponse contractorResponse = contractorMapper.mapFromEntity(contractor);
+
+        return ResponseEntity.status(HttpStatus.OK).body(contractorResponse);
+    }
+
+    @DeleteMapping("/contractors/{id}")
+    public ResponseEntity deleteContractor(@PathVariable Long id) throws NotFoundObjectException {
+        contractorService.deleteContractor(id);
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }

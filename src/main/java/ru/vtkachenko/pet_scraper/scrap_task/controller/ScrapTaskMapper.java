@@ -1,9 +1,11 @@
 package ru.vtkachenko.pet_scraper.scrap_task.controller;
 
+import org.springframework.stereotype.Component;
 import ru.vtkachenko.pet_scraper.scrap_task.controller.dto.ScrapTaskRequest;
 import ru.vtkachenko.pet_scraper.scrap_task.controller.dto.ScrapTaskResponse;
 import ru.vtkachenko.pet_scraper.scrap_task.model.ScrapTask;
 
+@Component
 public class ScrapTaskMapper {
     public ScrapTask mapToEntity(ScrapTaskRequest scrapTaskRequest) {
         return ScrapTask.builder()

@@ -10,7 +10,6 @@ import ru.vtkachenko.pet_scraper.nomenclature.controller.dto.NomenclatureRespons
 import ru.vtkachenko.pet_scraper.nomenclature.model.Nomenclature;
 import ru.vtkachenko.pet_scraper.nomenclature.service.NomenclatureService;
 
-import javax.xml.transform.OutputKeys;
 import java.util.List;
 
 @RestController
@@ -28,7 +27,6 @@ public class NomenclatureController {
     }
 
     @PostMapping("/nomenclatures")
-
     public ResponseEntity<NomenclatureResponse> createNomenclature(@RequestBody NomenclatureRequest nomenclatureRequest) {
         Nomenclature nomenclature = nomenclatureMapper.mapToEntity(nomenclatureRequest);
         NomenclatureResponse nomenclatureResponse = nomenclatureMapper.mapFromEntity(
@@ -37,6 +35,17 @@ public class NomenclatureController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(nomenclatureResponse);
     }
+
+    @PutMapping("/nomenclatures")
+    public ResponseEntity<NomenclatureResponse> updateNomenclature(@RequestBody NomenclatureRequest nomenclatureRequest) throws NotFoundObjectException {
+        Nomenclature nomenclature = nomenclatureMapper.mapToEntity(nomenclatureRequest);
+        NomenclatureResponse nomenclatureResponse = nomenclatureMapper.mapFromEntity(
+                nomenclatureService.updateNomenclature(nomenclature)
+        );
+
+        return ResponseEntity.status(HttpStatus.OK).body(nomenclatureResponse);
+    }
+
 
     @GetMapping("/nomenclatures")
     public ResponseEntity<List<NomenclatureResponse>> getAllNomenclatures() {

@@ -11,7 +11,6 @@ import ru.vtkachenko.pet_scraper.city.service.CityService;
 import ru.vtkachenko.pet_scraper.exception.NotFoundObjectException;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -32,6 +31,14 @@ public class CityController {
         CityResponse cityResponse = cityMapper.mapFromEntity(cityService.saveCity(city));
 
         return ResponseEntity.status(HttpStatus.CREATED).body(cityResponse);
+    }
+
+    @PutMapping("/cities")
+    public ResponseEntity<CityResponse> updateCity(@RequestBody CityRequest cityRequest) throws NotFoundObjectException {
+        City city = cityMapper.mapToEntity(cityRequest);
+        CityResponse cityResponse = cityMapper.mapFromEntity(cityService.updateCity(city));
+
+        return ResponseEntity.status(HttpStatus.OK).body(cityResponse);
     }
 
     @GetMapping("/cities")
