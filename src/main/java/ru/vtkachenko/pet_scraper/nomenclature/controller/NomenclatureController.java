@@ -12,7 +12,8 @@ import ru.vtkachenko.pet_scraper.nomenclature.service.NomenclatureService;
 
 import java.util.List;
 
-@RestController("api/v1/nomenclatures")
+@RestController
+@RequestMapping("api/v1/nomenclatures")
 @CrossOrigin(origins = "*")
 public class NomenclatureController {
 

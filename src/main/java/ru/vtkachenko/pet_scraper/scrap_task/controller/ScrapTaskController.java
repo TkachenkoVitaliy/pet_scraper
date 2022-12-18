@@ -17,7 +17,8 @@ import java.time.Clock;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@RestController("/api/v1/scrap-tasks")
+@RestController
+@RequestMapping("/api/v1/scrap-tasks")
 @CrossOrigin(origins = "*")
 public class ScrapTaskController {
     private final ScrapTaskService scrapTasksService;

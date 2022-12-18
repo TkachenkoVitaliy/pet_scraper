@@ -12,7 +12,8 @@ import ru.vtkachenko.pet_scraper.exception.api.NotFoundObjectException;
 
 import java.util.List;
 
-@RestController("/api/v1/cities")
+@RestController
+@RequestMapping("/api/v1/cities")
 @CrossOrigin(origins = "*")
 public class CityController {
 

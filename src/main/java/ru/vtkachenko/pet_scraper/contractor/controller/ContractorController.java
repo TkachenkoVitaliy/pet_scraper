@@ -12,7 +12,8 @@ import ru.vtkachenko.pet_scraper.exception.api.NotFoundObjectException;
 
 import java.util.List;
 
-@RestController("/api/v1/contractors")
+@RestController
+@RequestMapping("/api/v1/contractors")
 @CrossOrigin(origins = "*")
 public class ContractorController {
 
