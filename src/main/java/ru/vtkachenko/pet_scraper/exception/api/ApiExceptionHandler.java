@@ -15,7 +15,7 @@ public class ApiExceptionHandler {
                                                                  HttpServletRequest request) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(ErrorResponse.builder()
-                        .type("/errors/" + exception.getClass())
+                        .type("/errors/" + exception.getClass().getSimpleName())
                         .title(exception.getTitle())
                         .status(HttpStatus.NOT_FOUND.value())
                         .detail(exception.getMessage())
