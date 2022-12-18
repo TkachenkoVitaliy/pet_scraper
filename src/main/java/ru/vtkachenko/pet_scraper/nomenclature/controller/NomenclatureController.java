@@ -12,7 +12,7 @@ import ru.vtkachenko.pet_scraper.nomenclature.service.NomenclatureService;
 
 import java.util.List;
 
-@RestController
+@RestController("api/v1/nomenclatures")
 @CrossOrigin(origins = "*")
 public class NomenclatureController {
 
@@ -26,7 +26,7 @@ public class NomenclatureController {
         this.nomenclatureMapper = nomenclatureMapper;
     }
 
-    @PostMapping("/nomenclatures")
+    @PostMapping
     public ResponseEntity<NomenclatureResponse> createNomenclature(@RequestBody NomenclatureRequest nomenclatureRequest) {
         Nomenclature nomenclature = nomenclatureMapper.mapToEntity(nomenclatureRequest);
         NomenclatureResponse nomenclatureResponse = nomenclatureMapper.mapFromEntity(
@@ -36,7 +36,7 @@ public class NomenclatureController {
         return ResponseEntity.status(HttpStatus.CREATED).body(nomenclatureResponse);
     }
 
-    @PutMapping("/nomenclatures")
+    @PutMapping
     public ResponseEntity<NomenclatureResponse> updateNomenclature(@RequestBody NomenclatureRequest nomenclatureRequest) throws NotFoundObjectException {
         Nomenclature nomenclature = nomenclatureMapper.mapToEntity(nomenclatureRequest);
         NomenclatureResponse nomenclatureResponse = nomenclatureMapper.mapFromEntity(
@@ -47,7 +47,7 @@ public class NomenclatureController {
     }
 
 
-    @GetMapping("/nomenclatures")
+    @GetMapping
     public ResponseEntity<List<NomenclatureResponse>> getAllNomenclatures() {
         List<Nomenclature> nomenclatures = nomenclatureService.getAllNomenclatures();
         List<NomenclatureResponse> nomenclaturesResponse = nomenclatures.stream()
@@ -57,7 +57,7 @@ public class NomenclatureController {
         return ResponseEntity.status(HttpStatus.OK).body(nomenclaturesResponse);
     }
 
-    @GetMapping("/nomenclatures/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<NomenclatureResponse> getNomenclature(@PathVariable Long id) throws NotFoundObjectException {
         Nomenclature nomenclature = nomenclatureService.getNomenclatureById(id);
         NomenclatureResponse nomenclatureResponse = nomenclatureMapper.mapFromEntity(nomenclature);
@@ -65,7 +65,7 @@ public class NomenclatureController {
         return ResponseEntity.status(HttpStatus.OK).body(nomenclatureResponse);
     }
 
-    @DeleteMapping("/nomenclatures/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity deleteNomenclature(@PathVariable Long id) throws NotFoundObjectException {
         nomenclatureService.deleteNomenclature(id);
 

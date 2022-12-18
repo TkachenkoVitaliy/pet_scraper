@@ -12,7 +12,7 @@ import ru.vtkachenko.pet_scraper.exception.api.NotFoundObjectException;
 
 import java.util.List;
 
-@RestController
+@RestController("/api/v1/cities")
 @CrossOrigin(origins = "*")
 public class CityController {
 
@@ -25,7 +25,7 @@ public class CityController {
         this.cityMapper = cityMapper;
     }
 
-    @PostMapping("/cities")
+    @PostMapping
     public ResponseEntity<CityResponse> createCity(@RequestBody CityRequest cityRequest) {
         City city = cityMapper.mapToEntity(cityRequest);
         CityResponse cityResponse = cityMapper.mapFromEntity(cityService.saveCity(city));
@@ -33,7 +33,7 @@ public class CityController {
         return ResponseEntity.status(HttpStatus.CREATED).body(cityResponse);
     }
 
-    @PutMapping("/cities")
+    @PutMapping
     public ResponseEntity<CityResponse> updateCity(@RequestBody CityRequest cityRequest) throws NotFoundObjectException {
         City city = cityMapper.mapToEntity(cityRequest);
         CityResponse cityResponse = cityMapper.mapFromEntity(cityService.updateCity(city));
@@ -41,7 +41,7 @@ public class CityController {
         return ResponseEntity.status(HttpStatus.OK).body(cityResponse);
     }
 
-    @GetMapping("/cities")
+    @GetMapping
     public ResponseEntity<List<CityResponse>> getAllCity() {
         List<City> cities = cityService.getAllCities();
         List<CityResponse> citiesResponse = cities.stream()
@@ -51,7 +51,7 @@ public class CityController {
         return ResponseEntity.status(HttpStatus.OK).body(citiesResponse);
     }
 
-    @GetMapping("/cities/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<CityResponse> getCity(@PathVariable Long id) throws NotFoundObjectException {
         // TODO придумать как отдавать на клиента обработанные ошибки
         City city = cityService.getCityById(id);
@@ -60,7 +60,7 @@ public class CityController {
         return ResponseEntity.status(HttpStatus.OK).body(cityResponse);
     }
 
-    @DeleteMapping("/cities/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity deleteCity(@PathVariable Long id) throws NotFoundObjectException {
         cityService.deleteCity(id);
 

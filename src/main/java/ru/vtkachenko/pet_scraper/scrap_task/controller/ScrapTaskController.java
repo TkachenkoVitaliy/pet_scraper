@@ -17,7 +17,7 @@ import java.time.Clock;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@RestController
+@RestController("/api/v1/scrap-tasks")
 @CrossOrigin(origins = "*")
 public class ScrapTaskController {
     private final ScrapTaskService scrapTasksService;
@@ -32,7 +32,7 @@ public class ScrapTaskController {
         this.clock = clock;
     }
 
-    @PostMapping("/scrap-tasks")
+    @PostMapping
     public ResponseEntity<ScrapTaskResponse> createScrapTask(@RequestBody ScrapTaskRequest scrapTaskRequest) {
         ScrapTask scrapTask = scrapTaskMapper.mapToEntity(scrapTaskRequest);
         ScrapTaskResponse scrapTaskResponse = scrapTaskMapper.mapFromEntity(scrapTasksService.saveScrapTask(scrapTask));
@@ -40,7 +40,7 @@ public class ScrapTaskController {
         return ResponseEntity.status(HttpStatus.CREATED).body(scrapTaskResponse);
     }
 
-    @PutMapping("/scrap-tasks")
+    @PutMapping
     public ResponseEntity<ScrapTaskResponse> updateScrapTask(@RequestBody ScrapTaskRequest scrapTaskRequest) throws NotFoundObjectException {
         ScrapTask scrapTask = scrapTaskMapper.mapToEntity(scrapTaskRequest);
         ScrapTaskResponse scrapTaskResponse = scrapTaskMapper.mapFromEntity(
@@ -50,7 +50,7 @@ public class ScrapTaskController {
         return ResponseEntity.status(HttpStatus.OK).body(scrapTaskResponse);
     }
 
-    @GetMapping("/scrap-tasks")
+    @GetMapping
     public ResponseEntity<List<ScrapTaskResponse>> getAllScrapTasks() {
         List<ScrapTask> scrapTasks = scrapTasksService.getAllScrapTasks();
         List<ScrapTaskResponse> scrapTasksResponse = scrapTasks.stream()
@@ -60,7 +60,7 @@ public class ScrapTaskController {
         return ResponseEntity.status(HttpStatus.OK).body(scrapTasksResponse);
     }
 
-    @GetMapping("/scrap-tasks/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<ScrapTaskResponse> getScrapTask(@PathVariable Long id) throws NotFoundObjectException {
         ScrapTask scrapTask = scrapTasksService.getScrapTaskById(id);
         ScrapTaskResponse scrapTaskResponse = scrapTaskMapper.mapFromEntity(scrapTask);
@@ -68,14 +68,14 @@ public class ScrapTaskController {
         return ResponseEntity.status(HttpStatus.OK).body(scrapTaskResponse);
     }
 
-    @DeleteMapping("/scrap-tasks/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity deleteScrapTask(@PathVariable Long id) throws NotFoundObjectException {
         scrapTasksService.deleteScrapTask(id);
 
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @PostMapping("/preliminary-tasks/run")
+    @PostMapping("/run")
     public ResponseEntity<TaskResultResponse> runScrapTask (@RequestBody PreliminaryTask preliminaryTask) throws IOException {
         String result = scrapTasksService.runPreliminaryTask(preliminaryTask);
         LocalDateTime completedAt = LocalDateTime.now(clock);

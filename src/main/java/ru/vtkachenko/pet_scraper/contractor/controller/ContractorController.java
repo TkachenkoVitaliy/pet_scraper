@@ -12,7 +12,7 @@ import ru.vtkachenko.pet_scraper.exception.api.NotFoundObjectException;
 
 import java.util.List;
 
-@RestController
+@RestController("/api/v1/contractors")
 @CrossOrigin(origins = "*")
 public class ContractorController {
 
@@ -25,7 +25,7 @@ public class ContractorController {
         this.contractorMapper = contractorMapper;
     }
 
-    @PostMapping("/contractors")
+    @PostMapping
     public ResponseEntity<ContractorResponse> createContractor(@RequestBody ContractorRequest contractorRequest) {
         Contractor contractor = contractorMapper.mapToEntity(contractorRequest);
         ContractorResponse contractorResponse = contractorMapper.mapFromEntity(contractorService.saveContractor(contractor));
@@ -33,7 +33,7 @@ public class ContractorController {
         return ResponseEntity.status(HttpStatus.CREATED).body(contractorResponse);
     }
 
-    @PutMapping("/contractors")
+    @PutMapping
     public ResponseEntity<ContractorResponse> updateContractor(@RequestBody ContractorRequest contractorRequest) throws NotFoundObjectException {
         Contractor contractor = contractorMapper.mapToEntity(contractorRequest);
         ContractorResponse contractorResponse = contractorMapper.mapFromEntity(contractorService.updateContractor(contractor));
@@ -41,7 +41,7 @@ public class ContractorController {
         return ResponseEntity.status(HttpStatus.OK).body(contractorResponse);
     }
 
-    @GetMapping("/contractors")
+    @GetMapping
     public ResponseEntity<List<ContractorResponse>> getAllContractors() {
         List<Contractor> contractors = contractorService.getAllContractors();
         List<ContractorResponse> contractorsResponse = contractors.stream().
@@ -51,7 +51,7 @@ public class ContractorController {
         return ResponseEntity.status(HttpStatus.OK).body(contractorsResponse);
     }
 
-    @GetMapping("/contractors/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<ContractorResponse> getContractor(@PathVariable Long id) throws NotFoundObjectException {
         Contractor contractor = contractorService.getContractorById(id);
         ContractorResponse contractorResponse = contractorMapper.mapFromEntity(contractor);
@@ -59,7 +59,7 @@ public class ContractorController {
         return ResponseEntity.status(HttpStatus.OK).body(contractorResponse);
     }
 
-    @DeleteMapping("/contractors/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity deleteContractor(@PathVariable Long id) throws NotFoundObjectException {
         contractorService.deleteContractor(id);
 
