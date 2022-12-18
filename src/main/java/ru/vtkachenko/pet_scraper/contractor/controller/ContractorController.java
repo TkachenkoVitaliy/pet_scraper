@@ -8,7 +8,7 @@ import ru.vtkachenko.pet_scraper.contractor.controller.dto.ContractorRequest;
 import ru.vtkachenko.pet_scraper.contractor.controller.dto.ContractorResponse;
 import ru.vtkachenko.pet_scraper.contractor.model.Contractor;
 import ru.vtkachenko.pet_scraper.contractor.service.ContractorService;
-import ru.vtkachenko.pet_scraper.exception.NotFoundObjectException;
+import ru.vtkachenko.pet_scraper.exception.api.NotFoundObjectException;
 
 import java.util.List;
 

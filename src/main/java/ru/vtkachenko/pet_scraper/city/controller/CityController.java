@@ -8,7 +8,7 @@ import ru.vtkachenko.pet_scraper.city.controller.dto.CityRequest;
 import ru.vtkachenko.pet_scraper.city.controller.dto.CityResponse;
 import ru.vtkachenko.pet_scraper.city.model.City;
 import ru.vtkachenko.pet_scraper.city.service.CityService;
-import ru.vtkachenko.pet_scraper.exception.NotFoundObjectException;
+import ru.vtkachenko.pet_scraper.exception.api.NotFoundObjectException;
 
 import java.util.List;
 

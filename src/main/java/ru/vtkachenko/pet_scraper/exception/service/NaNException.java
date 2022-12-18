@@ -1,4 +1,4 @@
-package ru.vtkachenko.pet_scraper.exception;
+package ru.vtkachenko.pet_scraper.exception.service;
 
 public class NaNException extends Exception {
     public NaNException(String message) {

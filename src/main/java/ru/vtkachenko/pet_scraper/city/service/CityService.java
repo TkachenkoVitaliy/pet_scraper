@@ -2,7 +2,7 @@ package ru.vtkachenko.pet_scraper.city.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.vtkachenko.pet_scraper.exception.NotFoundObjectException;
+import ru.vtkachenko.pet_scraper.exception.api.NotFoundObjectException;
 import ru.vtkachenko.pet_scraper.city.model.City;
 import ru.vtkachenko.pet_scraper.city.repository.CityRepository;
 

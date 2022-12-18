@@ -4,8 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.vtkachenko.pet_scraper.exception.NaNException;
-import ru.vtkachenko.pet_scraper.exception.NotFoundObjectException;
+import ru.vtkachenko.pet_scraper.exception.api.NotFoundObjectException;
 import ru.vtkachenko.pet_scraper.scrap_task.controller.dto.ScrapTaskRequest;
 import ru.vtkachenko.pet_scraper.scrap_task.controller.dto.ScrapTaskResponse;
 import ru.vtkachenko.pet_scraper.scrap_task.controller.dto.TaskResultResponse;
@@ -87,20 +86,6 @@ public class ScrapTaskController {
                         .result(result)
                         .completedAt(completedAt)
                         .build()
-                );
-    }
-
-    @PostMapping("/scrap-tasks/{id}/run")
-    public ResponseEntity<TaskResultResponse> runScrapTask (@PathVariable Long id) throws IOException, NaNException, NotFoundObjectException {
-        String result = String.valueOf(scrapTasksService.runScrapTask(id));
-        LocalDateTime completedAt = LocalDateTime.now(clock);
-
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(
-                        TaskResultResponse.builder()
-                                .result(result)
-                                .completedAt(completedAt)
-                                .build()
                 );
     }
 }
