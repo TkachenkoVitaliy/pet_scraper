@@ -1,5 +1,6 @@
 package ru.vtkachenko.pet_scraper.task_result.service;
 
+import org.springframework.stereotype.Service;
 import ru.vtkachenko.pet_scraper.exception.service.NaNException;
 import ru.vtkachenko.pet_scraper.scrap_task.model.ScrapTask;
 import ru.vtkachenko.pet_scraper.scrap_task.service.ScrapTaskService;
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+@Service
 public class TaskResultService {
 
     private final TaskResultRepository taskResultRepository;
