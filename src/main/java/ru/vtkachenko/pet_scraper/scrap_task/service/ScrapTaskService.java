@@ -46,12 +46,24 @@ public class ScrapTaskService {
         scrapTaskRepository.deleteById(id);
     }
 
-//    Refactor
+//    TODO Refactor
 
 
     public int runScrapTask(Long id) throws IOException, NaNException, NotFoundObjectException {
         ScrapTask scrapTask = getScrapTaskById(id);
 
+        int result = 0;
+        String textResult = runPreliminaryTask(scrapTask);
+
+        try {
+            result = Integer.parseInt(textResult.replaceAll(" ", ""));
+        } catch (NumberFormatException e) {
+            throw new NaNException(textResult);
+        }
+        return result;
+    }
+
+    public int runScrapTask(ScrapTask scrapTask) throws IOException, NaNException {
         int result = 0;
         String textResult = runPreliminaryTask(scrapTask);
 
